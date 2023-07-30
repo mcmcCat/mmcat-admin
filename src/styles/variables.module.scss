@@ -1,0 +1,7 @@
+// xxx.module.scss 文件可以:export出去对应的sass文件的变量，使其能够在TypeScript中使用，不过需要手动导入
+// 以键值对的形式暴露
+:export {
+  menuBg: $menuBg;
+  menuText: $menuText;
+  menuActiveText: $menuActiveText;
+}
