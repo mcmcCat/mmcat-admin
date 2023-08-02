@@ -65,7 +65,8 @@ export default ({mode}:any) => {
           IconsResolver({}),
         ],
         vueTemplate: true, // 是否在 vue 模板中自动导入
-        dts: path.resolve(pathSrc, "types", "auto-imports.d.ts"), // 指定自动导入函数TS类型声明文件路径
+        dts: false, //自动导入完设置为false，不然每次启动项目都会导入一次
+        // dts: path.resolve(pathSrc, "types", "auto-imports.d.ts"), // 指定自动导入函数TS类型声明文件路径
       }),
       Components({
         resolvers: [
@@ -76,7 +77,9 @@ export default ({mode}:any) => {
             enabledCollections: ["maki","ep"], // @iconify-json/maki 和 @iconify-json/ep是 Element Plus 的图标库，其他图标库 https://icon-sets.iconify.design/
           }),
         ],
-        dts: path.resolve(pathSrc, "types", "components.d.ts"), // 指定自动导入组件TS类型声明文件路径
+        dirs: ["src/**/components"],//表示匹配 src 目录下及其子目录下的所有 带有字符串"components" 的目录
+        dts: false, //自动导入完设置为false，不然每次启动项目都会导入一次
+        // dts: path.resolve(pathSrc, "types", "components.d.ts"), // 指定自动导入组件TS类型声明文件路径
       }),
       Icons({
         // 自动安装图标库,会自动安装指定的图标库ep

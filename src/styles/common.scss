@@ -9,9 +9,24 @@
   align-items: center;
   justify-content: space-between;
 }
+.flx-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
 .flx-align-center {
   display: flex;
   align-items: center;
+}
+
+.flx-wrap {
+  flex-wrap: wrap;
+}
+
+.flx-col {
+  display: flex;
+  flex-direction: column;
 }
 
 /* clearfix */
@@ -79,5 +94,3 @@
 //   background-color: var(--el-border-color-darker);
 //   border-radius: 20px;
 // }
-
-

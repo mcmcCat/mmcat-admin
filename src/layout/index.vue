@@ -25,10 +25,6 @@
 
 import { computed, watchEffect } from "vue";
 import { useWindowSize } from "@vueuse/core";
-import { AppMain, Navbar, Settings, } from "./components/index"; // 为什么要手动导入呢? 因为vite.config.ts中只指定了自动导入src/component下的组件
-// import { AppMain, Navbar, Settings, TagsView } from "./components/index";
-import Sidebar from "./components/Sidebar/index.vue";
-import RightPanel from "@/components/RightPanel/index.vue";
 
 import { useAppStore } from "@/store/modules/app";
 import { useSettingsStore } from "@/store/modules/settings";
