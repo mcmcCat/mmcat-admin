@@ -2,32 +2,31 @@
   <!-- 顶部导航栏 -->
   <div class="navbar flx-between">
     <!-- 左侧面包屑 -->
-    <div>
+    <div class="flx">
       <hamburger
         :is-active="appStore.sidebar.opened"
         @toggle-click="toggleSideBar"
       />
-      <!-- <breadcrumb /> -->
+      <breadcrumb />
     </div>
 
-    <!-- 右侧导航设置 -->
-    
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
-// import { useRoute, useRouter } from "vue-router";a
+import { useRoute, useRouter } from "vue-router";
 import { useAppStore } from "@/store/modules/app";
 // import { useTagsViewStore } from "@/store/modules/tagsView";
-// import { useUserStore } from "@/store/modules/user";
+import { useUserStore } from "@/store/modules/user";
 
 const appStore = useAppStore();
 // const tagsViewStore = useTagsViewStore();
-// const userStore = useUserStore();
+const userStore = useUserStore();
 
-// const route = useRoute();
-// const router = useRouter();
+const route = useRoute();
+const router = useRouter();
 
 // const { device } = storeToRefs(appStore); // 设备类型：desktop-宽屏设备 || mobile-窄屏设备
 

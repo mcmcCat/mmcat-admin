@@ -23,13 +23,13 @@ export const useAppStore = defineStore("app", () => {
   /**
    * 根据语言标识读取对应的语言包
    */
-  // const locale = computed(() => {
-  //   if (language?.value == "en") {
-  //     return en;
-  //   } else {
-  //     return zhCn;
-  //   }
-  // });
+  const locale = computed(() => {
+    if (language?.value == "en") {
+      return en;
+    } else {
+      return zhCn;
+    }
+  });
 
   // actions
   function toggleSidebar(withoutAnimation: boolean) {
@@ -67,19 +67,19 @@ export const useAppStore = defineStore("app", () => {
   //  *
   //  * @param val
   //  */
-  // function changeLanguage(val: string) {
-  //   language.value = val;
-  // }
+  function changeLanguage(val: string) {
+    language.value = val;
+  }
 
   return {
     // device,
     sidebar,
     language,
-    // locale,
+    locale,
     // size,
     // toggleDevice,
     // changeSize,
-    // changeLanguage,
+    changeLanguage,
     toggleSidebar,
     closeSideBar,
     openSideBar,

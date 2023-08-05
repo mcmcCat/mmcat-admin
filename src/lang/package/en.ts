@@ -2,7 +2,9 @@ export default {
   // 路由国际化
   route: {
     dashboard: 'Dashboard',
-    document: 'Document'
+    document: 'Document',
+    // TODO: 添加更多翻译文本
+    '系统管理': 'System'
   },
   // 登录页面国际化
   login: {
