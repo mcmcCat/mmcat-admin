@@ -2,6 +2,7 @@ import router from "@/router";
 import { useUserStoreHook } from "@/store/modules/user";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 
+// TODO: 进度条
 // import NProgress from "nprogress";
 // import "nprogress/nprogress.css";
 // NProgress.configure({ showSpinner: false }); // 进度条
@@ -47,6 +48,8 @@ router.beforeEach(async (to, from, next) => {
           // 根据用户的角色，做动态路由权限功能
           // 生成动态路由即生成可进入的路由 accessRoutes
           const accessRoutes = await permissionStore.generateRoutes(roles);
+          console.log(accessRoutes);
+          
           accessRoutes.forEach((route) => {
             router.addRoute(route); // 向路由实例的路由表添加动态路由对象
           });

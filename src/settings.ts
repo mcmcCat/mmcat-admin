@@ -31,9 +31,9 @@ interface DefaultSettings {
   theme: string;
 
   /**
-   * 布局大小
+   * (el原生组件)布局大小
    */
-  size: string;
+  elSize: string;
 
   /**
    * 语言
@@ -55,7 +55,7 @@ const defaultSettings: DefaultSettings = {
    * light: 明亮模式
    */
   theme: "dark",
-  size: "default", // default | large | small
+  elSize: "default", // default | large | small
   language: "zh-cn", // zh-cn | en
 };
 

@@ -10,7 +10,56 @@
       <breadcrumb />
     </div>
 
+    <!-- 右侧导航设置 -->
+    <div class="flx">
+      <!-- 导航栏设置(窄屏隐藏)-->
+      <!-- TODO: <div v-if="device !== 'mobile'" class="setting-container"> -->
+      <div class="setting-container flx-align-center">
+        <!--全屏 -->
+        <div class="setting-item" @click="toggle">
+          <svg-icon
+            :icon-name="isFullscreen ? 'exit-fullscreen' : 'fullscreen'"
+          />
+        </div>
+        <!-- 布局大小 -->
+        <el-tooltip content="布局大小" effect="dark" placement="bottom">
+          <size-select class="setting-item" />
+        </el-tooltip>
+        <!--语言选择-->
+        <lang-select class="setting-item" />
+      </div>
 
+      <!-- 用户头像 -->
+      <el-dropdown trigger="click">
+        <div class="avatar-container flx-center">
+          <img :src="userStore.avatar + '?imageView2/1/w/40/h/40'" />
+          <i-ep-caret-bottom style="width: 0.75rem;height: 0.75rem;" />
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <router-link to="/">
+              <!-- i18n已经全局注册了所以这里可以直接使用 $t函数 进行翻译 -->
+              <el-dropdown-item>{{ $t("navbar.dashboard") }}</el-dropdown-item>
+            </router-link>
+            <a
+              target="_blank"
+              href="https://github.com/mcmcCat/mmcat-admin"
+            >
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a
+              target="_blank"
+              href="#"
+            >
+              <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click="logout">
+              {{ $t("navbar.logout") }}
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
+    </div>
   </div>
 </template>
 
@@ -44,22 +93,22 @@ const { isFullscreen, toggle } = useFullscreen();
 /**
  * 注销
  */
-// function logout() {
-//   ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
-//     confirmButtonText: "确定",
-//     cancelButtonText: "取消",
-//     type: "warning",
-//   }).then(() => {
-//     userStore
-//       .logout()
-//       .then(() => {
-//         tagsViewStore.delAllViews();
-//       })
-//       .then(() => {
-//         router.push(`/login?redirect=${route.fullPath}`);
-//       });
-//   });
-// }
+function logout() {
+  ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
+    confirmButtonText: "确定",
+    cancelButtonText: "取消",
+    type: "warning",
+  }).then(() => {
+    userStore.logout()
+      .then(() => {
+        // TODO: 注销删除所有tagView
+        // tagsViewStore.delAllViews();
+      })
+      .then(() => {
+        router.push(`/login?redirect=${route.fullPath}`);//route.fullPath是当前页面路径，方便注销后登录跳转回来
+      });
+  });
+}
 </script>
 
 <style lang="scss" scoped>
@@ -69,9 +118,6 @@ const { isFullscreen, toggle } = useFullscreen();
   box-shadow: 0 0 1px #0003;
 
   .setting-container {
-    display: flex;
-    align-items: center;
-
     .setting-item {
       display: inline-block;
       width: 30px;
@@ -88,9 +134,6 @@ const { isFullscreen, toggle } = useFullscreen();
   }
 
   .avatar-container {
-    display: flex;
-    align-items: center;
-    justify-items: center;
     margin: 0 5px;
     cursor: pointer;
 

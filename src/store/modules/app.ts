@@ -11,7 +11,7 @@ export const useAppStore = defineStore("app", () => {
   
   // state
   // const device = useStorage("device", "desktop");
-  // const size = useStorage<any>("size", defaultSettings.size);
+  const elSize = useStorage<any>("elSize", defaultSettings.elSize);
   const language = useStorage("language", defaultSettings.language);
 
   const sidebarStatus = useStorage("sidebarStatus", "closed");
@@ -59,9 +59,9 @@ export const useAppStore = defineStore("app", () => {
   //   device.value = val;
   // }
 
-  // function changeSize(val: string) {
-  //   size.value = val;
-  // }
+  function changeSize(val: string) {
+    elSize.value = val;
+  }
   // /**
   //  * 切换语言
   //  *
@@ -76,9 +76,9 @@ export const useAppStore = defineStore("app", () => {
     sidebar,
     language,
     locale,
-    // size,
+    elSize,
     // toggleDevice,
-    // changeSize,
+    changeSize,
     changeLanguage,
     toggleSidebar,
     closeSideBar,

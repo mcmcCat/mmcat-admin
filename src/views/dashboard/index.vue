@@ -8,6 +8,7 @@
       <el-card style="width: 100%">
         <div class="flx-between flx-wrap">
           <div class="flx-align-center">
+            <!-- 确保使用的图片服务支持 imageView2 这个图片处理参数，比如七牛云、腾讯云等。如果您使用的图片服务不支持这个参数，那么添加 ?imageView2/1/w/80/h/80 部分是没有效果的。 -->
             <!-- 在腾讯云的图片处理服务中，imageView2 是图片处理的固定前缀，1 是指定的图片处理指令，具体指令可以有多个选择 -->
             <!-- /w/80/h/80 用来设置图片宽80高80 -->
             <img

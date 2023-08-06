@@ -1,13 +1,14 @@
 import { defineStore } from "pinia";
 
-import { loginApi } from "@/api/auth";
-import { getUserInfo } from "@/api/user"
+import { loginApi, logoutApi } from "@/api/auth";
+import { getUserInfo } from "@/api/user";
+import { resetRouter } from "@/router";
 import { store } from "@/store";
 
 import { LoginData } from "@/api/auth/types";
-import { UserInfo } from "@/api/user/types"
+import { UserInfo } from "@/api/user/types";
 
-import { useStorage } from "@vueuse/core";// @vueuse/core库中的 useStorage Hook 用于在Vue组件中存取数据。 它通过 localStorage 来存储和获取值。
+import { useStorage } from "@vueuse/core"; // @vueuse/core库中的 useStorage Hook 用于在Vue组件中存取数据。 它通过 localStorage 来存储和获取值。
 
 export const useUserStore = defineStore("user", () => {
   // State
@@ -17,7 +18,7 @@ export const useUserStore = defineStore("user", () => {
   const avatar = ref("");
   const roles = ref<Array<string>>([]); // 用户角色编码集合 → 判断路由权限
   const perms = ref<Array<string>>([]); // 用户权限编码集合 → 判断按钮权限
-  
+
   // Action
 
   /**
@@ -29,7 +30,7 @@ export const useUserStore = defineStore("user", () => {
     return new Promise<void>((resolve, reject) => {
       loginApi(loginData)
         .then((response) => {
-          console.log('服务器响应信息:',response);
+          console.log("服务器响应信息:", response);
           // 将获取的token存入 localStorage
           const { tokenType, accessToken } = response.data;
           token.value = tokenType + " " + accessToken; // Bearer eyJhbGciOiJIUzI1NiJ9.xxx.xxx
@@ -44,12 +45,12 @@ export const useUserStore = defineStore("user", () => {
   /**
    * @description: 获取用户信息 --- (用户Id、用户昵称、头像、角色集合、权限集合)
    * @return {*}
-   */    
+   */
   function getInfo() {
     return new Promise<UserInfo>((resolve, reject) => {
       getUserInfo()
         .then(({ data }) => {
-          console.log('获取到的用户信息：',data);
+          console.log("获取到的用户信息：", data);
           if (!data) {
             return reject("验证失败,请重新登录！");
           }
@@ -69,15 +70,30 @@ export const useUserStore = defineStore("user", () => {
     });
   }
 
-   // 重置
-   function resetToken() {
+  // 注销
+  function logout() {
+    return new Promise<void>((resolve, reject) => {
+      logoutApi()
+        .then(() => {
+          resetRouter();
+          resetToken();
+          location.reload(); // 清空路由
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
+  // 重置
+  function resetToken() {
     token.value = "";
     nickname.value = "";
     avatar.value = "";
     roles.value = [];
     perms.value = [];
   }
-
 
   return {
     token,
@@ -88,9 +104,8 @@ export const useUserStore = defineStore("user", () => {
     perms,
     login,
     getInfo,
-    // logout,
+    logout,
     resetToken,
-
   };
 });
 
