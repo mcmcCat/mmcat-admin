@@ -269,7 +269,7 @@ onMounted(() => {
       <template #header>
         <!-- TODO: 作者故意设置没有按钮权限？ -->
         <el-button type="success" @click="openDialog()"
-          ><i-ep-plus />新增</el-button
+          ><i-ep-plus />新增</el-button 
         >
         <el-button
           type="danger"

@@ -2,8 +2,7 @@
   "compilerOptions": {
     "composite": true,
     "module": "ESNext",
-    "moduleResolution": "bundler",
-    "allowSyntheticDefaultImports": true
+    "moduleResolution": "bundler"
   },
   "include": ["vite.config.ts"]
 }

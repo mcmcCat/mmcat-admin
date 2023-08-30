@@ -3,11 +3,10 @@
 
     <Sidebar class="sidebar-container" />
     
-    <!-- TODO: :class="{ hasTagsView: showTagsView }" -->
-    <div class="main-container">
+    <div :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <navbar />
-        <!-- <tags-view v-if="showTagsView" /> -->
+        <tags-view v-if="showTagsView" />
       </div>
 
       <!--主页面-->

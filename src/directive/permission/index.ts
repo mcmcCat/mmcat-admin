@@ -42,6 +42,8 @@ export const hasRole: Directive = {
     if (value) {
       const requiredRoles = value; // DOM绑定需要的角色编码
       const { roles } = useUserStoreHook();
+      console.log(roles);
+      
       const hasRole = roles.some(perm => {
         return requiredRoles.includes(perm);
       });
@@ -50,7 +52,7 @@ export const hasRole: Directive = {
         el.parentNode && el.parentNode.removeChild(el);
       }
     } else {
-      throw new Error("need roles! Like v-has-role=\"['admin','test']\"");
+      throw new Error("need roles! Like v-hasRole=\"['admin','test']\"");
     }
   }
 };
