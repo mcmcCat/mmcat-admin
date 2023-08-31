@@ -2,10 +2,9 @@ import router from "@/router";
 import { useUserStoreHook } from "@/store/modules/user";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 
-// TODO: 进度条
-// import NProgress from "nprogress";
-// import "nprogress/nprogress.css";
-// NProgress.configure({ showSpinner: false }); // 进度条
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+NProgress.configure({ showSpinner: false }); // 进度条是否显示旋转的小圆圈
 
 const permissionStore = usePermissionStoreHook();
 
@@ -13,13 +12,13 @@ const permissionStore = usePermissionStoreHook();
 const whiteList = ["/login"];
 
 router.beforeEach(async (to, from, next) => {
-  // NProgress.start();
+  NProgress.start();
   const hasToken = localStorage.getItem("accessToken");
   if (hasToken) {
     if (to.path === "/login") { 
       // 已登录且想去登录页 "/login" 则直接跳转首页 "/"
       next({ path: "/" });
-      // NProgress.done();
+      NProgress.done();
     } else { 
       // 已登录且想去除了登录页（白名单）的页面，则查看当前用户的角色（判断路由权限）
       const userStore = useUserStoreHook();
@@ -65,7 +64,7 @@ router.beforeEach(async (to, from, next) => {
           // 移除 token 并跳转登录页
           await userStore.resetToken();
           next(`/login?redirect=${to.path}`);
-          // NProgress.done();
+          NProgress.done();
         }
       }
     }
@@ -76,11 +75,11 @@ router.beforeEach(async (to, from, next) => {
     } else {
       // 登录后token过期或者token被删除等情况
       next(`/login?redirect=${to.path}`);
-      // NProgress.done();
+      NProgress.done();
     }
   }
 });
 
 router.afterEach(() => {
-  // NProgress.done();
+  NProgress.done();
 });
