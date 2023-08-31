@@ -69,17 +69,17 @@ const rules = reactive({
 const searchDeptName = ref();
 const deptList = ref<OptionType[]>();
 const roleList = ref<OptionType[]>();
-// const importDialog = reactive<DialogOption>({
-//   title: "用户导入",
-//   visible: false,
-// });
+const importDialog = reactive<DialogOption>({
+  title: "用户导入",
+  visible: false,
+});
 
 /**
  * 导入选择的部门ID
  */
-// const importDeptId = ref<number>();
-// const excelFile = ref<File>();
-// const excelFilelist = ref<File[]>([]);
+const importDeptId = ref<number>();
+const excelFile = ref<File>();
+const excelFilelist = ref<File[]>([]);
 
 watchEffect(
   () => {
@@ -302,94 +302,101 @@ async function getDeptOptions() {
 /**
  * 下载导入模板
  */
-// function downloadTemplate() {
-//   downloadTemplateApi().then((response: any) => {
-//     const blob = new Blob([response.data], {
-//       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
-//     });
-//     const a = document.createElement("a");
-//     const href = window.URL.createObjectURL(blob); // 下载链接
-//     a.href = href;
-//     a.download = decodeURI(
-//       response.headers["content-disposition"].split(";")[1].split("=")[1]
-//     ); // 获取后台设置的文件名称
-//     document.body.appendChild(a);
-//     a.click(); // 点击下载
-//     document.body.removeChild(a); // 下载完成移除元素
-//     window.URL.revokeObjectURL(href); // 释放掉blob对象
-//   });
-// }
+function downloadTemplate() {
+  downloadTemplateApi().then((response: any) => {
+    // 根据响应的数据创建一个Blob对象。Blob对象用于表示二进制数据，这里表示下载的文件数据
+    const blob = new Blob([response.data], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
+    });
+    const a = document.createElement("a");
+    // window.URL.createObjectURL()方法生成的文件的URL。该方法会创建一个临时的URL，用于文件下载
+    const href = window.URL.createObjectURL(blob); // 下载链接
+    a.href = href;
+    // 通过解析响应头部的content-disposition字段，获取到后端设置的文件名称，并设置<a>元素的download属性为该文件名称。
+    
+    // 获取后台设置的文件名称
+    a.download = decodeURI(
+      // response.headers["content-disposition"] === attachment; filename=%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx
+      response.headers["content-disposition"].split(";")[1].split("=")[1]
+    ); 
+    // decodeURI(%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF)可以得出文件的名称
+    document.body.appendChild(a);
+    a.click(); // 点击下载
+    document.body.removeChild(a); // 下载完成移除元素
+    window.URL.revokeObjectURL(href); // 释放掉根据blob对象创建的临时URL
+  });
+}
 
 /**
  * 打开导入弹窗
  */
-// async function openImportDialog() {
-//   await getDeptOptions();
-//   importDeptId.value = undefined;
-//   importDialog.visible = true;
-// }
+async function openImportDialog() {
+  await getDeptOptions();
+  importDeptId.value = undefined;
+  importDialog.visible = true;
+}
 
 /**
  * Excel文件change事件
  *
  * @param file
  */
-// function handleExcelChange(file: UploadFile) {
-//   if (!/\.(xlsx|xls|XLSX|XLS)$/.test(file.name)) {
-//     ElMessage.warning("上传Excel只能为xlsx、xls格式");
-//     excelFile.value = undefined;
-//     excelFilelist.value = [];
-//     return false;
-//   }
-//   excelFile.value = file.raw;
-// }
+function handleExcelChange(file: UploadFile) {
+  if (!/\.(xlsx|xls|XLSX|XLS)$/.test(file.name)) {
+    ElMessage.warning("上传Excel只能为xlsx、xls格式");
+    excelFile.value = undefined;
+    excelFilelist.value = [];
+    return false;
+  }
+  excelFile.value = file.raw;
+}
 
 /**
  * 导入用户提交
  */
-// function handleUserImport() {
-//   if (importDeptId.value) {
-//     if (!excelFile.value) {
-//       ElMessage.warning("上传Excel文件不能为空");
-//       return false;
-//     }
-//     importUser(importDeptId.value, excelFile.value).then((response) => {
-//       ElMessage.success(response.data);
-//       closeImportDialog();
-//       resetQuery();
-//     });
-//   }
-// }
+function handleUserImport() {
+  if (importDeptId.value) {
+    if (!excelFile.value) {
+      ElMessage.warning("上传Excel文件不能为空");
+      return false;
+    }
+    importUser(importDeptId.value, excelFile.value).then((response) => {
+      ElMessage.success(response.data);
+      closeImportDialog();
+      resetQuery();
+    });
+  }
+}
 
 /**
  * 关闭导入弹窗
  */
-// function closeImportDialog() {
-//   importDialog.visible = false;
-//   excelFile.value = undefined;
-//   excelFilelist.value = [];
-// }
+function closeImportDialog() {
+  importDialog.visible = false;
+  excelFile.value = undefined;
+  excelFilelist.value = [];
+}
 
 /**
  * 导出用户
  */
-// function handleUserExport() {
-//   exportUser(queryParams).then((response: any) => {
-//     const blob = new Blob([response.data], {
-//       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
-//     });
-//     const a = document.createElement("a");
-//     const href = window.URL.createObjectURL(blob); // 下载的链接
-//     a.href = href;
-//     a.download = decodeURI(
-//       response.headers["content-disposition"].split(";")[1].split("=")[1]
-//     ); // 获取后台设置的文件名称
-//     document.body.appendChild(a);
-//     a.click(); // 点击导出
-//     document.body.removeChild(a); // 下载完成移除元素
-//     window.URL.revokeObjectURL(href); // 释放掉blob对象
-//   });
-// }
+function handleUserExport() {
+  exportUser(queryParams).then((response: any) => {
+    const blob = new Blob([response.data], {
+      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8",
+    });
+    const a = document.createElement("a");
+    const href = window.URL.createObjectURL(blob); // 下载的链接
+    a.href = href;
+    a.download = decodeURI(
+      response.headers["content-disposition"].split(";")[1].split("=")[1]
+    ); // 获取后台设置的文件名称
+    document.body.appendChild(a);
+    a.click(); // 点击导出
+    document.body.removeChild(a); // 下载完成移除元素
+    window.URL.revokeObjectURL(href); // 释放掉blob对象
+  });
+}
 
 onMounted(() => {
   getDeptOptions(); // 初始化部门下拉选项
@@ -465,7 +472,7 @@ onMounted(() => {
         <!-- 用户信息展示栏 -->
         <el-card shadow="never">
           <template #header>
-            <div class="flex justify-between">
+            <div style="display: flex; justify-content: space-between;" >
               <div>
                 <el-button
                   v-hasPerm="['sys:user:add']"
@@ -481,7 +488,7 @@ onMounted(() => {
                   ><i-ep-delete />删除</el-button
                 >
               </div>
-              <!-- <div>
+              <div>
                 <el-dropdown split-button>
                   导入
                   <template #dropdown>
@@ -495,10 +502,10 @@ onMounted(() => {
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
-                <el-button class="ml-3" @click="handleUserExport"
+                <el-button style="margin-left: 0.75rem;" @click="handleUserExport"
                   ><template #icon><i-ep-download /></template>导出</el-button
                 >
-              </div> -->
+              </div>
             </div>
           </template>
 
@@ -695,7 +702,7 @@ onMounted(() => {
     </el-dialog>
 
     <!-- 导入弹窗 -->
-    <!-- <el-dialog
+    <el-dialog
       v-model="importDialog.visible"
       :title="importDialog.title"
       width="600px"
@@ -743,7 +750,7 @@ onMounted(() => {
           <el-button @click="closeImportDialog">取 消</el-button>
         </div>
       </template>
-    </el-dialog> -->
+    </el-dialog>
   </div>
 </template>
 <style lang="scss" scoped>
