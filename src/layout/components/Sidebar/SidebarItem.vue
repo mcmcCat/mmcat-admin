@@ -46,7 +46,8 @@ function hasOneShowingChild(children = [], parent: any) {
       return true;
     }
   });
-
+  console.log(showingChildren);
+  
   // 1：如果只有一个子路由, 返回 true
   if (showingChildren.length === 1) {
     return true;
@@ -79,8 +80,9 @@ function resolvePath(routePath: string) {
 }
 </script>
 <template>
+  <!-- item是传过来的路由信息对象 -->
   <div v-if="!item.meta || !item.meta.hidden">
-    <!-- 只包含一个子路由节点的路由，显示其【唯一子路由】 -->
+    <!-- 1. 只包含一个子路由节点的路由或者无子路由，显示其【唯一子路由】 -->
     <!-- 
       (!onlyOneChild.children || onlyOneChild.noShowingChildren) 只是使代码的语义完整（并无什么实质性作用），一个子路由或者无子路由则或运算返回true
       其中，!onlyOneChild.children表示只有onlyOneChild这个子路由，它的children属性为undefined
@@ -107,7 +109,7 @@ function resolvePath(routePath: string) {
       </app-link>
     </template>
 
-    <!-- 包含多个子路由  -->
+    <!-- 2. 包含多个子路由  -->
     <el-sub-menu v-else :index="resolvePath(item.path)" teleported>
       <template #title>
         <svg-icon
