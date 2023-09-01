@@ -1,6 +1,6 @@
 import request from '@/utils/request';
 import { AxiosPromise } from 'axios';
-import { LoginData, LoginResult } from './types';
+import { CaptchaResult, LoginData, LoginResult } from './types';
 
 /**
  * 定义登录接口 
