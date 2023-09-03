@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
+    "@wangeditor/editor": "5.1.23",
+    "@wangeditor/editor-for-vue": "^5.1.10",
     "axios": "^1.4.0",
     "echarts": "5.2.2",
     "element-plus": "^2.3.6",

@@ -9,7 +9,7 @@
         <tags-view v-if="showTagsView" />
       </div>
 
-      <!--主页面-->
+      <!--主页面-->                  
       <app-main />
 
       <!-- 设置面板 -->
@@ -21,7 +21,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { computed, watchEffect } from "vue";
 import { useWindowSize } from "@vueuse/core";
 
