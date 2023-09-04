@@ -14,7 +14,6 @@ const props = defineProps({
     type: Object,
     required: true,
   },
-
   /**
    * 父层级的路由路径(eg:/multi-level/multi-level1/multi-level2)
    */
@@ -46,7 +45,6 @@ function hasOneShowingChild(children = [], parent: any) {
       return true;
     }
   });
-  console.log(showingChildren);
   
   // 1：如果只有一个子路由, 返回 true
   if (showingChildren.length === 1) {
