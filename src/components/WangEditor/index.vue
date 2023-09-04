@@ -87,13 +87,16 @@ onBeforeUnmount(() => {
     flex-grow: 1;
   }
 }
+
 .w-e-bar-item .disabled svg {
   fill: #ddd !important;
 }
+
 .w-e-bar svg {
   fill: #aaa !important;
 }
-.w-e-bar-item .active svg{
+
+.w-e-bar-item .active svg {
   fill: #409eff !important;
 }
 </style>

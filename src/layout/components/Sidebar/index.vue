@@ -14,13 +14,11 @@ const permissionStore = usePermissionStore();
 const appStore = useAppStore();
 const currRoute = useRoute(); // 获取当前路由信息
 const { sidebarLogo } = storeToRefs(settingsStore); //其实可以不用storeToRefs,只是可以解构出来，为了使用时方便
-
-
 </script>
 
 <template>
   <div :class="{ 'has-logo': sidebarLogo }">
-    <Logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" /> 
+    <Logo v-if="sidebarLogo" :collapse="!appStore.sidebar.opened" />
     <el-scrollbar>
       <el-menu
         :default-active="currRoute.path"

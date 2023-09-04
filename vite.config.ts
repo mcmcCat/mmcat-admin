@@ -1,4 +1,4 @@
-import { defineConfig,loadEnv } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 import AutoImport from "unplugin-auto-import/vite";
@@ -6,13 +6,13 @@ import Components from "unplugin-vue-components/vite";
 import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
-import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 const pathSrc = path.resolve(__dirname, "src");
 
 // https://vitejs.dev/config/
-export default ({mode}:any) => {
-  const env = loadEnv(mode,process.cwd()) // 获取当前环境的环境变量，process.cwd()当前工作的绝对路径
+export default ({ mode }: any) => {
+  const env = loadEnv(mode, process.cwd()); // 获取当前环境的环境变量，process.cwd()当前工作的绝对路径
   return defineConfig({
     // 配置路径别名
     resolve: {
@@ -26,26 +26,26 @@ export default ({mode}:any) => {
     css: {
       // CSS 预处理器
       preprocessorOptions: {
-          //define global scss variable
-          scss: {
-              javascriptEnabled: true,
-              additionalData: `@use "@/styles/variables.scss" as *;` // @use 文件路径 as * 将该文件中的所有变量挂载到全局，所有的scss文件或者<style lang="scss">中都可以使用
-          }
-      }
+        //define global scss variable
+        scss: {
+          javascriptEnabled: true,
+          additionalData: `@use "@/styles/variables.scss" as *;`, // @use 文件路径 as * 将该文件中的所有变量挂载到全局，所有的scss文件或者<style lang="scss">中都可以使用
+        },
+      },
     },
     server: {
-      host: '0.0.0.0',
+      host: "0.0.0.0",
       port: Number(env.VITE_APP_PORT),
       open: true, // 运行自动打开浏览器
       // 反向代理解决跨域
       proxy: {
         [env.VITE_APP_BASE_API]: {
-          target: 'http://vapi.youlai.tech',
+          target: "http://vapi.youlai.tech",
           changeOrigin: true,
-          rewrite:(path) => {
-            return path.replace(new RegExp('^' + env.VITE_APP_BASE_API),'')
-          }
-        }
+          rewrite: (path) => {
+            return path.replace(new RegExp("^" + env.VITE_APP_BASE_API), "");
+          },
+        },
       },
     },
     plugins: [
@@ -74,10 +74,10 @@ export default ({mode}:any) => {
           ElementPlusResolver(),
           // 自动注册图标组件
           IconsResolver({
-            enabledCollections: ["maki","ep"], // @iconify-json/maki 和 @iconify-json/ep是 Element Plus 的图标库，其他图标库 https://icon-sets.iconify.design/
+            enabledCollections: ["maki", "ep"], // @iconify-json/maki 和 @iconify-json/ep是 Element Plus 的图标库，其他图标库 https://icon-sets.iconify.design/
           }),
         ],
-        dirs: ["src/**/components"],//表示匹配 src 目录下及其子目录下的所有 带有字符串"components" 的目录
+        dirs: ["src/**/components"], //表示匹配 src 目录下及其子目录下的所有 带有字符串"components" 的目录
         dts: false, //自动导入完设置为false，不然每次启动项目都会导入一次
         // dts: path.resolve(pathSrc, "types", "components.d.ts"), // 指定自动导入组件TS类型声明文件路径
       }),
@@ -87,10 +87,10 @@ export default ({mode}:any) => {
       }),
       createSvgIconsPlugin({
         // 指定需要缓存的图标文件夹
-        iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+        iconDirs: [path.resolve(process.cwd(), "src/assets/icons")],
         // 指定symbolId格式
-        symbolId: 'icon-[dir]-[name]',
-      })
+        symbolId: "icon-[dir]-[name]",
+      }),
     ],
     // 优化依赖项（即第三方库）的加载和打包
     optimizeDeps: {
@@ -148,4 +148,4 @@ export default ({mode}:any) => {
       ],
     },
   });
-}
+};

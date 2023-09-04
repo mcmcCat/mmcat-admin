@@ -207,10 +207,14 @@ onMounted(() => {
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleQuery"
-            ><i-ep-search />搜索</el-button
-          >
-          <el-button @click="resetQuery"> <i-ep-refresh />重置</el-button>
+          <el-button type="primary" @click="handleQuery">
+            <i-ep-search />
+            搜索
+          </el-button>
+          <el-button @click="resetQuery">
+            <i-ep-refresh />
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -220,15 +224,19 @@ onMounted(() => {
           v-hasPerm="['sys:dict:add']"
           type="success"
           @click="openDialog()"
-          ><i-ep-plus />新增</el-button
         >
+          <i-ep-plus />
+          新增
+        </el-button>
         <el-button
           v-hasPerm="['sys:dict:delete']"
           type="danger"
           :disabled="ids.length === 0"
           @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
         >
+          <i-ep-delete />
+          删除
+        </el-button>
       </template>
 
       <!-- 数据表格 -->
@@ -254,15 +262,19 @@ onMounted(() => {
               type="primary"
               link
               @click="openDialog(scope.row.id)"
-              ><i-ep-edit />编辑</el-button
             >
+              <i-ep-edit />
+              编辑
+            </el-button>
             <el-button
               v-hasPerm="['sys:dict:delete']"
               type="primary"
               link
               @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />删除</el-button
             >
+              <i-ep-delete />
+              删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -310,7 +322,7 @@ onMounted(() => {
           </el-radio-group>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
-          <el-input v-model="formData.remark" type="textarea"></el-input>
+          <el-input v-model="formData.remark" type="textarea" />
         </el-form-item>
       </el-form>
       <template #footer>

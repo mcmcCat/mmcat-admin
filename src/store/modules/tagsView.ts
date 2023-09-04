@@ -9,7 +9,7 @@ export interface TagView extends Partial<RouteLocationNormalized> {
 // setup
 export const useTagsViewStore = defineStore("tagsView", () => {
   // state
-  const visitedViews = ref<TagView[]>([]);// TagView其实就是路由对象
+  const visitedViews = ref<TagView[]>([]); // TagView其实就是路由对象
   const cachedViews = ref<string[]>([]);
 
   // actions
@@ -81,7 +81,6 @@ export const useTagsViewStore = defineStore("tagsView", () => {
       if (index > -1) {
         // 只留下点击【关闭其他】的那一个
         cachedViews.value = cachedViews.value.slice(index, index + 1);
-        
       } else {
         // if index = -1, there is no cached tags
         cachedViews.value = [];
@@ -134,7 +133,7 @@ export const useTagsViewStore = defineStore("tagsView", () => {
       const currIndex = visitedViews.value.findIndex(
         (v) => v.path === view.path
       );
-      
+
       if (currIndex === -1) {
         return;
       }
@@ -143,7 +142,7 @@ export const useTagsViewStore = defineStore("tagsView", () => {
         // affix:true 固定tag，例如“首页”
         if (index >= currIndex || (item.meta && item.meta.affix)) {
           console.log(item);
-          
+
           return true;
         }
 

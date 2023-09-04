@@ -2,8 +2,6 @@
 // import { useTagsViewStore } from "@/store/modules/tagsView";
 
 // const tagsViewStore = useTagsViewStore();
-
-
 </script>
 
 <template>
@@ -15,8 +13,8 @@
           在 Vue.js 中，当我们使用 v-for 或者 v-if 渲染一组数据列表时，可能需要指定一个唯一的 key 值来区分不同的数据项。这样可以提高性能，避免不必要的重新渲染和 DOM 操作。
           同样地，当我们使用 <router-view> 来动态渲染路由组件时，我们也需要指定一个唯一的 key 值来区分不同的路由组件，从而实现缓存和更新的效果。这个 key 值一般使用当前路由的完整路径来标识，以确保每个路由组件都有一个唯一的标识。
          -->
-         <!-- :include="tagsViewStore.cachedViews" 将需要缓存的组件打包到一个数组中 -->
-         <!-- 需要注意的是，如果我们没有指定 :include 属性，则 <keep-alive> 组件会自动缓存所有组件。 -->
+        <!-- :include="tagsViewStore.cachedViews" 将需要缓存的组件打包到一个数组中 -->
+        <!-- 需要注意的是，如果我们没有指定 :include 属性，则 <keep-alive> 组件会自动缓存所有组件。 -->
         <!-- TODO: 原本是这样<keep-alive :include="tagsViewStore.cachedViews"> -->
         <keep-alive>
           <component :is="Component" :key="route.fullPath" />

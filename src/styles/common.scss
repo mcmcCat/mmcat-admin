@@ -2,16 +2,19 @@
 .flx {
   display: flex;
 }
+
 .flx-center {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .flx-between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .flx-end {
   display: flex;
   align-items: center;
@@ -67,11 +70,13 @@
 .fade-transform-enter-active {
   transition: all 0.2s;
 }
+
 .fade-transform-enter-from {
   opacity: 0;
   transition: all 0.2s;
   transform: translateX(-30px);
 }
+
 .fade-transform-leave-to {
   opacity: 0;
   transition: all 0.2s;

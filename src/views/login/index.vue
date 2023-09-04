@@ -80,15 +80,18 @@
         size="default"
         :loading="loading"
         type="primary"
-        style="width: 100%;"
+        style="width: 100%"
         @click.prevent="handleLogin"
-        >{{ $t("login.login") }}
+      >
+        {{ $t("login.login") }}
       </el-button>
 
       <!-- 账号密码提示 -->
-      <div style="margin-top: 1rem; color: white; font-size: 0.875rem;">
+      <div style="margin-top: 1rem; font-size: 0.875rem; color: white">
         <span>{{ $t("login.username") }}: admin</span>
-        <span style="margin-left: 1rem;"> {{ $t("login.password") }}: 123456</span>
+        <span style="margin-left: 1rem">
+          {{ $t("login.password") }}: 123456
+        </span>
       </div>
     </el-form>
   </div>
@@ -190,9 +193,9 @@ function handleLogin() {
           */
           const query: LocationQuery = route.query;
           console.log(query); // {redirect: '/dashboard'}
-          
+
           const redirect = (query.redirect as LocationQueryValue) ?? "/";
-          
+
           const otherQueryParams = Object.keys(query).reduce(
             // ["redirect"].reduce()
             (acc: any, cur: string) => {
@@ -240,16 +243,18 @@ onMounted(() => {
 
     .loginHead {
       display: flex;
-      color: white;
       align-items: center;
       padding-top: 1rem;
       padding-bottom: 1rem;
+      color: white;
+
       .loginText {
-        font-size: 2rem;
         flex: 1;
+        font-size: 2rem;
         text-align: center;
       }
     }
+
     .captcha {
       position: absolute;
       top: 0;
@@ -281,10 +286,10 @@ onMounted(() => {
 
     .el-input__inner {
       color: #fff;
+      caret-color: #fff;
       background: transparent;
       border: 0;
       border-radius: 0;
-      caret-color: #fff;
 
       &:-webkit-autofill {
         box-shadow: 0 0 0 1000px transparent inset !important;
@@ -296,7 +301,9 @@ onMounted(() => {
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus,
       &:-webkit-autofill:active {
-        transition: color 99999s ease-out, background-color 99999s ease-out;
+        transition:
+          color 99999s ease-out,
+          background-color 99999s ease-out;
         transition-delay: 99999s;
       }
     }

@@ -7,7 +7,32 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint src --ext .vue,.js,.ts,.jsx,.tsx --fix"
+    "lint:eslint": "eslint  --fix --ext .ts,.js,.vue ./src ",
+    "lint:prettier": "prettier --write \"**/*.{js,cjs,ts,json,tsx,css,less,scss,vue,html,md}\"",
+    "lint:stylelint": "stylelint  \"**/*.{css,scss,vue}\" --fix",
+    "lint:lint-staged": "lint-staged",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{cjs,json}": [
+      "prettier --write"
+    ],
+    "*.{vue,html}": [
+      "eslint --fix",
+      "prettier --write",
+      "stylelint --fix"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@vueuse/core": "^10.1.2",
@@ -28,20 +53,40 @@
     "@iconify-json/maki": "^1.1.18",
     "@types/nprogress": "0.2.0",
     "@types/path-browserify": "^1.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.59.11",
-    "@typescript-eslint/parser": "^5.59.11",
+    "@typescript-eslint/eslint-plugin": "^6.5.0",
+    "@typescript-eslint/parser": "^6.5.0",
     "@vitejs/plugin-vue": "^4.1.0",
     "eslint": "^8.43.0",
-    "eslint-plugin-vue": "^9.15.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-vue": "^9.17.0",
     "fast-glob": "3.2.11",
+    "lint-staged": "^14.0.1",
     "path-browserify": "^1.0.1",
+    "postcss": "^8.4.29",
+    "postcss-html": "^1.5.0",
+    "postcss-scss": "^4.0.7",
+    "prettier": "^3.0.3",
     "sass": "^1.63.4",
+    "stylelint": "^15.10.3",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-recess-order": "^4.3.0",
+    "stylelint-config-recommended-scss": "^13.0.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^34.0.0",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.16.4",
     "unplugin-icons": "^0.16.3",
     "unplugin-vue-components": "^0.25.1",
     "vite": "^4.3.9",
     "vite-plugin-svg-icons": "2.0.1",
-    "vue-tsc": "^1.4.2"
+    "vue-tsc": "^1.4.2",
+    "husky": "^8.0.0"
+  },
+  "repository": "https://github.com/mcmcCat/mmcat-admin",
+  "author": "mcmcCat",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16.0.0"
   }
 }

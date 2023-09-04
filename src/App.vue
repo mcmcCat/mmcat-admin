@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAppStore } from '@/store/modules/app';
+import { useAppStore } from "@/store/modules/app";
 const appStore = useAppStore();
 </script>
 
@@ -9,8 +9,3 @@ const appStore = useAppStore();
     <router-view />
   </el-config-provider>
 </template>
-
-
-<style scoped>
-
-</style>

@@ -203,8 +203,8 @@ function openMenuDialog(row: RolePageVO) {
         .then(({ data }) => {
           const checkedMenuIds = data;
           console.log("勾选权限", checkedMenuIds);
-          checkedMenuIds.forEach((menuId) =>
-            menuRef.value.setChecked(menuId, true, false)// 对已拥有的菜单进行自动勾选
+          checkedMenuIds.forEach(
+            (menuId) => menuRef.value.setChecked(menuId, true, false) // 对已拥有的菜单进行自动勾选
           );
         })
         .finally(() => {
@@ -223,7 +223,7 @@ function handleRoleMenuSubmit() {
     const checkedMenuIds: number[] = menuRef.value
       .getCheckedNodes(false, true) // 这样的参数表示，在调用getCheckedNodes方法时，返回的已选中节点数组中将包含那些半选中的节点。(半选中，即checkbox为减号的状态)
       .map((node: any) => node.value);
-    
+
     loading.value = true;
     updateRoleMenus(roleId, checkedMenuIds)
       .then((res) => {
@@ -257,10 +257,14 @@ onMounted(() => {
         </el-form-item>
 
         <el-form-item>
-          <el-button type="primary" @click="handleQuery"
-            ><i-ep-search />搜索</el-button
-          >
-          <el-button @click="resetQuery"><i-ep-refresh />重置</el-button>
+          <el-button type="primary" @click="handleQuery">
+            <i-ep-search />
+            搜索
+          </el-button>
+          <el-button @click="resetQuery">
+            <i-ep-refresh />
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -268,15 +272,18 @@ onMounted(() => {
     <el-card shadow="never">
       <template #header>
         <!-- TODO: 作者故意设置没有按钮权限？ -->
-        <el-button type="success" @click="openDialog()"
-          ><i-ep-plus />新增</el-button 
-        >
+        <el-button type="success" @click="openDialog()">
+          <i-ep-plus />
+          新增
+        </el-button>
         <el-button
           type="danger"
           :disabled="ids.length === 0"
           @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
         >
+          <i-ep-delete />
+          删除
+        </el-button>
       </template>
 
       <el-table
@@ -308,7 +315,8 @@ onMounted(() => {
               link
               @click="openMenuDialog(scope.row)"
             >
-              <i-ep-position />分配权限
+              <i-ep-position />
+              分配权限
             </el-button>
             <el-button
               type="primary"
@@ -316,7 +324,8 @@ onMounted(() => {
               link
               @click="openDialog(scope.row.id)"
             >
-              <i-ep-edit />编辑
+              <i-ep-edit />
+              编辑
             </el-button>
             <el-button
               type="primary"
@@ -324,7 +333,8 @@ onMounted(() => {
               link
               @click="handleDelete(scope.row.id)"
             >
-              <i-ep-delete />删除
+              <i-ep-delete />
+              删除
             </el-button>
           </template>
         </el-table-column>
@@ -417,9 +427,9 @@ onMounted(() => {
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="handleRoleMenuSubmit"
-            >确 定</el-button
-          >
+          <el-button type="primary" @click="handleRoleMenuSubmit">
+            确 定
+          </el-button>
           <el-button @click="menuDialogVisible = false">取 消</el-button>
         </div>
       </template>

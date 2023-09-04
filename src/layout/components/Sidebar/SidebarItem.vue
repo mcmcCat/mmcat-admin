@@ -4,7 +4,7 @@ import { isExternal } from "@/utils/index";
 import AppLink from "./Link.vue";
 
 // TODO: 路由的国际化
-import { translateRouteTitleI18n } from '@/utils/i18n';
+import { translateRouteTitleI18n } from "@/utils/i18n";
 
 const props = defineProps({
   /**
@@ -45,7 +45,7 @@ function hasOneShowingChild(children = [], parent: any) {
       return true;
     }
   });
-  
+
   // 1：如果只有一个子路由, 返回 true
   if (showingChildren.length === 1) {
     return true;

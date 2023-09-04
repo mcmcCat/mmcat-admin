@@ -8,7 +8,6 @@ import en from "element-plus/es/locale/lang/en";
 
 // setup
 export const useAppStore = defineStore("app", () => {
-  
   // state
   // const device = useStorage("device", "desktop");
   const elSize = useStorage<any>("elSize", defaultSettings.elSize);
@@ -17,7 +16,7 @@ export const useAppStore = defineStore("app", () => {
   const sidebarStatus = useStorage("sidebarStatus", "closed");
   const sidebar = reactive({
     opened: sidebarStatus.value !== "closed", // 由于sidebarStatus存储在localstore中，可能为undefined，所以需要这个方式判断
-    withoutAnimation: false,// 侧边栏打开关闭是否有动画,false即开启动画
+    withoutAnimation: false, // 侧边栏打开关闭是否有动画,false即开启动画
   });
 
   /**
@@ -33,7 +32,7 @@ export const useAppStore = defineStore("app", () => {
 
   // actions
   function toggleSidebar(withoutAnimation: boolean) {
-    console.log('toggleSidebar的sidebar.opened:',!sidebar.opened);
+    console.log("toggleSidebar的sidebar.opened:", !sidebar.opened);
     sidebar.opened = !sidebar.opened;
     sidebar.withoutAnimation = withoutAnimation;
     if (sidebar.opened) {

@@ -1,15 +1,14 @@
 <template>
-  <div :class="classObj"  class="app-wrapper">
-
+  <div :class="classObj" class="app-wrapper">
     <Sidebar class="sidebar-container" />
-    
+
     <div :class="{ hasTagsView: showTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <navbar />
         <tags-view v-if="showTagsView" />
       </div>
 
-      <!--主页面-->                  
+      <!--主页面-->
       <app-main />
 
       <!-- 设置面板 -->
@@ -123,4 +122,3 @@ function handleOutsideClick() {
   opacity: 0.3;
 }
 </style>
-

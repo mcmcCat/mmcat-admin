@@ -1,6 +1,6 @@
 <template>
   <div ref="rightPanel" :class="{ show: show }">
-    <div class="right-panel-overlay" />
+    <div class="right-panel-overlay"></div>
     <div class="right-panel-container">
       <div
         class="right-panel-btn"
@@ -13,7 +13,7 @@
         <i-ep-setting v-show="!show" />
       </div>
       <div>
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -32,7 +32,6 @@ defineProps({
 });
 
 watch(show, (value) => {
-
   if (value) {
     addEventClick();
   }
@@ -57,7 +56,7 @@ function addEventClick() {
 */
 function closeRightPanel(e: any) {
   // 主题选择点击不关闭
-  let parent = e.target.closest(".right-panel-container");// element.closest(selector) 在当前元素及其祖先元素中查找符合指定选择器的元素
+  let parent = e.target.closest(".right-panel-container"); // element.closest(selector) 在当前元素及其祖先元素中查找符合指定选择器的元素
   // 这段代码中的 if 判断语句用于判断点击事件发生的元素是否在 .right-panel-container 元素内，从而确定是否需要关闭侧边栏。简单来说，在侧边栏内控制show的按钮则不要关闭侧边栏，在侧边栏外的按钮会关闭侧边栏
   if (!parent) {
     show.value = false;
@@ -81,7 +80,6 @@ onBeforeUnmount(() => {
   rightPanel.value.remove();
 });
 </script>
-
 
 <style lang="scss" scoped>
 .showRightPanel {

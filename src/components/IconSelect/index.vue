@@ -26,7 +26,7 @@ const iconSelectorDialogRef = ref();
 function loadIcons() {
   const icons = import.meta.glob("../../assets/icons/*.svg");
   console.log(icons);
-  
+
   for (const icon in icons) {
     const iconName = icon.split("assets/icons/")[1].split(".svg")[0];
     allIconNames.push(iconName);
@@ -80,7 +80,7 @@ onMounted(() => {
         <svg-icon :icon-name="inputValue" />
       </template>
     </el-input>
-    
+
     <el-popover
       shadow="none"
       :visible="visible"
@@ -91,8 +91,8 @@ onMounted(() => {
       <!-- 触发弹窗的小三角 -->
       <template #reference>
         <div class="pop-button" @click="visible = !visible">
-          <i-ep-caret-top v-show="visible"></i-ep-caret-top>
-          <i-ep-caret-bottom v-show="!visible"></i-ep-caret-bottom>
+          <i-ep-caret-top v-show="visible" />
+          <i-ep-caret-bottom v-show="!visible" />
         </div>
       </template>
 
@@ -100,7 +100,7 @@ onMounted(() => {
       <div ref="iconSelectorDialogRef">
         <el-input
           v-model="filterValue"
-          style="padding: 2px;"
+          style="padding: 2px"
           placeholder="搜索图标"
           clearable
           @input="handleFilter"
@@ -164,13 +164,14 @@ onMounted(() => {
     }
   }
 }
+
 .pop-button {
-  cursor: pointer;
-  color: #999;
   position: absolute;
-  right: 10px;
   top: 0;
+  right: 10px;
   height: 32px;
   line-height: 32px;
+  color: #999;
+  cursor: pointer;
 }
 </style>

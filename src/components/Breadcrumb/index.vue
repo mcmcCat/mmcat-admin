@@ -1,13 +1,14 @@
 <template>
-  <el-breadcrumb class="flx-align-center" style="height: 50px;">
+  <el-breadcrumb class="flx-align-center" style="height: 50px">
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="item.path">
         <span
           v-if="
             item.redirect === 'noredirect' || index === breadcrumbs.length - 1
           "
-          style="color: var(--el-disabled-text-color);"
-          >{{ translateRouteTitleI18n(item.meta.title) }}
+          style="color: var(--el-disabled-text-color)"
+        >
+          {{ translateRouteTitleI18n(item.meta.title) }}
         </span>
         <a v-else @click.prevent="handleLink(item)">
           {{ translateRouteTitleI18n(item.meta.title) }}
@@ -26,14 +27,14 @@ import { translateRouteTitleI18n } from "@/utils/i18n";
 
 const currentRoute = useRoute();
 const pathCompile = (path: string) => {
-  const { params } = currentRoute;// 取到当前路由的请求参数，其实在这里的面包屑导航基本上只做跳转首页，所以路由对象的Param都为空对象即无请求参数
-  
-  const toPath = compile(path);// compile是主要用于处理复杂的动态路径的函数，但是上面说过了基本上只做跳转首页，未涉及到需要动态参数的请求路径，所以处理后的结果一致 path === toPath(params)
-  
-  return toPath(params);// 复杂的动态路径加上请求参数
+  const { params } = currentRoute; // 取到当前路由的请求参数，其实在这里的面包屑导航基本上只做跳转首页，所以路由对象的Param都为空对象即无请求参数
+
+  const toPath = compile(path); // compile是主要用于处理复杂的动态路径的函数，但是上面说过了基本上只做跳转首页，未涉及到需要动态参数的请求路径，所以处理后的结果一致 path === toPath(params)
+
+  return toPath(params); // 复杂的动态路径加上请求参数
 };
 
-const breadcrumbs = ref([] as Array<RouteLocationMatched>);// 用于存放拼接好的面包屑路由对象数组
+const breadcrumbs = ref([] as Array<RouteLocationMatched>); // 用于存放拼接好的面包屑路由对象数组
 
 function getBreadcrumb() {
   let matched = currentRoute.matched.filter(
@@ -54,7 +55,7 @@ function getBreadcrumb() {
 
 function isDashboard(route: RouteLocationMatched) {
   const name = route && route.name;
-  
+
   // 因为没有name肯定不是首页
   if (!name) {
     return false;
@@ -108,4 +109,3 @@ onBeforeMount(() => {
   font-weight: 400 !important;
 }
 </style>
-

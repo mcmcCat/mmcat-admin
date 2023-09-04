@@ -30,14 +30,16 @@
               target="_blank"
               type="danger"
               href="https://blog.csdn.net/u013737132/article/details/130191394"
-              >💥从零到一文档</el-link
             >
+              💥从零到一文档
+            </el-link>
             <el-divider direction="vertical" />
             <el-link
               target="_blank"
               type="primary"
               href="https://github.com/mcmcCat/mmcat-admin"
-              >GitHub
+            >
+              GitHub
             </el-link>
           </div>
         </div>
@@ -49,9 +51,7 @@
       <el-col :xs="24" :sm="12" :lg="6" style="margin-bottom: 1rem">
         <div class="data-box">
           <!-- TODO: icon-box的样式 -->
-          <div
-            class="icon-box uv"
-          >
+          <div class="icon-box uv">
             <svg-icon icon-name="uv" size="3em" />
           </div>
           <div class="flx-col" style="margin-top: 0.75rem">
@@ -66,9 +66,7 @@
       <!--消息数-->
       <el-col :xs="24" :sm="12" :lg="6" style="margin-bottom: 4px">
         <div class="data-box">
-          <div
-            class="icon-box message"
-          >
+          <div class="icon-box message">
             <svg-icon icon-name="message" size="3em" />
           </div>
           <div class="flx-col" style="margin-top: 0.75rem">
@@ -82,9 +80,7 @@
 
       <el-col :xs="24" :sm="12" :lg="6" style="margin-bottom: 4px">
         <div class="data-box">
-          <div
-            class="icon-box money"
-          >
+          <div class="icon-box money">
             <svg-icon icon-name="money" size="3em" />
           </div>
           <div class="flx-col" style="margin-top: 0.75rem">
@@ -97,9 +93,7 @@
       </el-col>
       <el-col :xs="24" :sm="12" :lg="6" style="margin-bottom: 4px">
         <div class="data-box">
-          <div
-            class="icon-box shopping"
-          >
+          <div class="icon-box shopping">
             <svg-icon icon-name="shopping" size="3em" />
           </div>
           <div class="flx-col" style="margin-top: 0.75rem">
@@ -115,27 +109,15 @@
     <!-- Echarts 图表 -->
     <el-row :gutter="40">
       <el-col :sm="24" :lg="8" style="margin-bottom: 1rem">
-        <BarChart
-          id="barChart"
-          height="400px"
-          width="100%"
-        />
+        <BarChart id="barChart" height="400px" width="100%" />
       </el-col>
 
       <el-col :xs="24" :sm="12" :lg="8" style="margin-bottom: 1rem">
-        <PieChart
-          id="pieChart"
-          height="400px"
-          width="100%"
-        />
+        <PieChart id="pieChart" height="400px" width="100%" />
       </el-col>
 
       <el-col :xs="24" :sm="12" :lg="8" style="margin-bottom: 1rem">
-        <RadarChart
-          id="radarChart"
-          height="400px"
-          width="100%"
-        />
+        <RadarChart id="radarChart" height="400px" width="100%" />
       </el-col>
     </el-row>
   </div>
@@ -183,7 +165,6 @@ const orderCountOutput = useTransition(orderCount, {
   transition: TransitionPresets.easeOutExpo,
 });
 orderCount.value = 2000;
-
 
 const greetings = computed(() => {
   if (date.getHours() >= 6 && date.getHours() < 8) {
@@ -237,44 +218,52 @@ const greetings = computed(() => {
     .icon-box {
       padding: 0.75rem;
       border-radius: 0.25rem;
+
       &.uv {
         color: #40c9c6; // 继承给子元素 .svg-icon的currentColor
         &:hover {
-          background-color: #40c9c6;
           color: #fff;
+          background-color: #40c9c6;
         }
+
         .svg-icon {
-          fill: currentColor !important;
+          fill: currentcolor !important;
         }
       }
+
       &.message {
         color: #36a3f7; // 继承给子元素 .svg-icon的currentColor
         &:hover {
-          background-color: #36a3f7;
           color: #fff;
+          background-color: #36a3f7;
         }
+
         .svg-icon {
-          fill: currentColor !important;
+          fill: currentcolor !important;
         }
       }
+
       &.money {
         color: #f4516c; // 继承给子元素 .svg-icon的currentColor
         &:hover {
-          background-color: #f4516c;
           color: #fff;
+          background-color: #f4516c;
         }
+
         .svg-icon {
-          fill: currentColor !important;
+          fill: currentcolor !important;
         }
       }
+
       &.shopping {
         color: #34bfa3; // 继承给子元素 .svg-icon的currentColor
         &:hover {
-          background-color: #34bfa3;
           color: #fff;
+          background-color: #34bfa3;
         }
+
         .svg-icon {
-          fill: currentColor !important;
+          fill: currentcolor !important;
         }
       }
     }

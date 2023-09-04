@@ -64,11 +64,11 @@ watch(
       return;
     }
 
-    console.log('fileList.value1',fileList.value);
+    console.log("fileList.value1", fileList.value);
     fileList.value = newVal.map((filePath) => {
       return { url: filePath } as UploadUserFile;
     });
-    console.log('fileList.value2',fileList.value);
+    console.log("fileList.value2", fileList.value);
   },
   { immediate: true }
 );
@@ -81,7 +81,7 @@ watch(
 async function handleUpload(options: UploadRequestOptions): Promise<any> {
   // 上传API调用
   const { data: fileInfo } = await uploadFileApi(options.file);
-  
+
   // 上传成功需手动替换文件路径为远程URL，否则图片地址为预览地址 blob:http://
   const fileIndex = fileList.value.findIndex(
     (file) => file.uid == (options.file as any).uid
@@ -91,7 +91,7 @@ async function handleUpload(options: UploadRequestOptions): Promise<any> {
     name: fileInfo.name,
     url: fileInfo.url,
   } as UploadUserFile);
-  console.log('自定义图片上传后的fileList:',fileList);
+  console.log("自定义图片上传后的fileList:", fileList);
 
   emit(
     "update:modelValue",

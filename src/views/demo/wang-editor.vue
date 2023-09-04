@@ -10,9 +10,10 @@ const value = ref("初始内容");
       href="https://gitee.com/youlaiorg/vue3-element-admin/blob/master/src/views/demo/wang-editor.vue"
       type="primary"
       target="_blank"
-      style="margin-bottom: 20px;"
-      >示例源码 请点击>>>></el-link
+      style="margin-bottom: 20px"
     >
+      示例源码 请点击>>>>
+    </el-link>
     <editor v-model="value" style="height: calc(100vh - 180px)" />
   </div>
 </template>

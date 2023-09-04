@@ -210,7 +210,6 @@ async function openDialog(userId?: number) {
     dialog.title = "修改用户";
     getUserForm(userId).then(({ data }) => {
       Object.assign(formData, data); // 对formData的覆盖，这样在dialog组件中所有form-item都双向绑定了该用户的formData
-      
     });
   } else {
     // 而新增用户没用发起请求，故formData是空的，需要自行输入新用户信息
@@ -243,12 +242,14 @@ function resetForm() {
  */
 // useThrottleFn(cb,ms)是VueUse提供的节流函数
 const handleSubmit = useThrottleFn(() => {
-  userFormRef.value.validate((valid: any) => { // valid为所有校验结果的与运算，全正确则值为true
+  userFormRef.value.validate((valid: any) => {
+    // valid为所有校验结果的与运算，全正确则值为true
     // 所有校验通过后则进入if
     if (valid) {
       const userId = formData.id;
       loading.value = true;
-      if (userId) { // 有userId的情况是修改用户
+      if (userId) {
+        // 有userId的情况是修改用户
         updateUser(userId, formData)
           .then(() => {
             ElMessage.success("修改用户成功");
@@ -256,7 +257,8 @@ const handleSubmit = useThrottleFn(() => {
             resetQuery();
           })
           .finally(() => (loading.value = false));
-      } else { // 无userId的情况是新增用户
+      } else {
+        // 无userId的情况是新增用户
         addUser(formData)
           .then(() => {
             ElMessage.success("新增用户成功");
@@ -274,7 +276,8 @@ const handleSubmit = useThrottleFn(() => {
  */
 function handleDelete(id?: number) {
   const userIds = [id || ids.value].join(",");
-  if (!userIds) { // 已经有disable属性阻止没有勾选时进行删除的情况，其实可以不用判断了
+  if (!userIds) {
+    // 已经有disable属性阻止没有勾选时进行删除的情况，其实可以不用判断了
     ElMessage.warning("请勾选删除项");
     return;
   }
@@ -313,12 +316,12 @@ function downloadTemplate() {
     const href = window.URL.createObjectURL(blob); // 下载链接
     a.href = href;
     // 通过解析响应头部的content-disposition字段，获取到后端设置的文件名称，并设置<a>元素的download属性为该文件名称。
-    
+
     // 获取后台设置的文件名称
     a.download = decodeURI(
       // response.headers["content-disposition"] === attachment; filename=%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx
       response.headers["content-disposition"].split(";")[1].split("=")[1]
-    ); 
+    );
     // decodeURI(%E7%94%A8%E6%88%B7%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF)可以得出文件的名称
     document.body.appendChild(a);
     a.click(); // 点击下载
@@ -428,7 +431,7 @@ onMounted(() => {
             :filter-node-method="handleDeptFilter"
             default-expand-all
             @node-click="handleDeptNodeClick"
-          ></el-tree>
+          />
         </el-card>
       </el-col>
 
@@ -460,10 +463,12 @@ onMounted(() => {
 
             <el-form-item>
               <el-button type="primary" @click="handleQuery">
-                <i-ep-search />搜索
+                <i-ep-search />
+                搜索
               </el-button>
               <el-button @click="resetQuery">
-                <i-ep-refresh />重置
+                <i-ep-refresh />
+                重置
               </el-button>
             </el-form-item>
           </el-form>
@@ -472,21 +477,25 @@ onMounted(() => {
         <!-- 用户信息展示栏 -->
         <el-card shadow="never">
           <template #header>
-            <div style="display: flex; justify-content: space-between;" >
+            <div style="display: flex; justify-content: space-between">
               <div>
                 <el-button
                   v-hasPerm="['sys:user:add']"
                   type="success"
                   @click="openDialog()"
-                  ><i-ep-plus />新增</el-button
                 >
+                  <i-ep-plus />
+                  新增
+                </el-button>
                 <el-button
                   v-hasPerm="['sys:user:delete']"
                   type="danger"
                   :disabled="ids.length === 0"
                   @click="handleDelete()"
-                  ><i-ep-delete />删除</el-button
                 >
+                  <i-ep-delete />
+                  删除
+                </el-button>
               </div>
               <div>
                 <el-dropdown split-button>
@@ -494,17 +503,23 @@ onMounted(() => {
                   <template #dropdown>
                     <el-dropdown-menu>
                       <el-dropdown-item @click="downloadTemplate">
-                        <i-ep-download />下载模板</el-dropdown-item
-                      >
+                        <i-ep-download />
+                        下载模板
+                      </el-dropdown-item>
                       <el-dropdown-item @click="openImportDialog">
-                        <i-ep-top />导入数据</el-dropdown-item
-                      >
+                        <i-ep-top />
+                        导入数据
+                      </el-dropdown-item>
                     </el-dropdown-menu>
                   </template>
                 </el-dropdown>
-                <el-button style="margin-left: 0.75rem;" @click="handleUserExport"
-                  ><template #icon><i-ep-download /></template>导出</el-button
+                <el-button
+                  style="margin-left: 0.75rem"
+                  @click="handleUserExport"
                 >
+                  <template #icon><i-ep-download /></template>
+                  导出
+                </el-button>
               </div>
             </div>
           </template>
@@ -570,7 +585,7 @@ onMounted(() => {
               align="center"
               prop="createTime"
               width="180"
-            ></el-table-column>
+            />
             <el-table-column label="操作" fixed="right" width="220">
               <template #default="scope">
                 <el-button
@@ -579,24 +594,30 @@ onMounted(() => {
                   size="small"
                   link
                   @click="resetPassword(scope.row)"
-                  ><i-ep-refresh-left />重置密码</el-button
                 >
+                  <i-ep-refresh-left />
+                  重置密码
+                </el-button>
                 <el-button
                   v-hasPerm="['sys:user:edit']"
                   type="primary"
                   link
                   size="small"
                   @click="openDialog(scope.row.id)"
-                  ><i-ep-edit />编辑</el-button
                 >
+                  <i-ep-edit />
+                  编辑
+                </el-button>
                 <el-button
                   v-hasPerm="['sys:user:delete']"
                   type="primary"
                   link
                   size="small"
                   @click="handleDelete(scope.row.id)"
-                  ><i-ep-delete />删除</el-button
                 >
+                  <i-ep-delete />
+                  删除
+                </el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -756,6 +777,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 .dept-col {
   margin-bottom: 12px;
+
   .el-tree {
     margin-top: 0.5rem;
   }

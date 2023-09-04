@@ -30,7 +30,7 @@ const { visitedViews } = storeToRefs(tagsViewStore);
 
 const selectedTag = ref({});
 const scrollPaneRef = ref();
-const left = ref(0);// left表示菜单距离左边的位置
+const left = ref(0); // left表示菜单距离左边的位置
 const top = ref(0);
 const affixTags = ref<TagView[]>([]);
 
@@ -68,7 +68,7 @@ function filterAffixTags(routes: any[], basePath = "/") {
         meta: { ...route.meta },
       });
     }
-    
+
     if (route.children) {
       const childTags = filterAffixTags(route.children, route.path);
       if (childTags.length >= 1) {
@@ -220,14 +220,14 @@ function openTagMenu(tag: TagView, e: MouseEvent) {
   // getBoundingClientRect() 是 DOM 元素的方法，它返回一个包含元素的位置信息的 DOMRect 对象，其中包括左边界的属性 left
   // 这里是 tags-container元素 的在屏幕的位置信息
   const offsetLeft = proxy?.$el.getBoundingClientRect().left; // container margin left
-  
+
   const offsetWidth = proxy?.$el.offsetWidth; // container width
   const maxLeft = offsetWidth - menuMinWidth; // left boundary（菜单的左边界位置）
   const l = e.clientX - offsetLeft + 15; // 15: margin right（偏移鼠标右键处）
-  console.log('offsetLeft:',offsetLeft);
-  console.log('offsetWidth:',offsetWidth);
-  console.log('maxLeft:',maxLeft);
-  console.log('l:',l);
+  console.log("offsetLeft:", offsetLeft);
+  console.log("offsetWidth:", offsetWidth);
+  console.log("maxLeft:", maxLeft);
+  console.log("l:", l);
 
   if (l > maxLeft) {
     left.value = maxLeft;

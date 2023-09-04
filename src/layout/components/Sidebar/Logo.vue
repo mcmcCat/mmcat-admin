@@ -4,7 +4,12 @@
     <transition name="sidebarLogoFade">
       <!-- router-link中的key属性的作用是给vue识别，减小性能开销 -->
       <!-- 只展示logo和title其一的模式 -->
-      <router-link v-if="collapse" key="collapse" class="logo-full flx-center" to="/">
+      <router-link
+        v-if="collapse"
+        key="collapse"
+        class="logo-full flx-center"
+        to="/"
+      >
         <img
           v-if="settingsStore.sidebarLogo"
           :src="logo"
@@ -56,6 +61,7 @@ const logo = ref(new URL(`../../../assets/cat1.jpg`, import.meta.url).href);
   .logo-full {
     width: 100%;
     height: 100%;
+
     .logoSize {
       width: 1.25rem;
       height: 1.25rem;

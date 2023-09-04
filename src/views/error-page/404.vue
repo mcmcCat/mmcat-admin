@@ -44,8 +44,9 @@ function message() {
             style="color: #20a0ff"
             href="https://wallstreetcn.com"
             target="_blank"
-            >wallstreetcn</a
           >
+            wallstreetcn
+          </a>
         </div>
         <div class="bullshit__headline">{{ message() }}</div>
         <div class="bullshit__info">
@@ -93,7 +94,7 @@ function message() {
         animation-name: cloudLeft;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-delay: .5s;
+        animation-delay: 0.5s;
         animation-fill-mode: forwards;
       }
 
@@ -105,7 +106,7 @@ function message() {
         animation-name: cloudMid;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-delay: .8s;
+        animation-delay: 0.8s;
         animation-fill-mode: forwards;
       }
 
@@ -117,7 +118,7 @@ function message() {
         animation-name: cloudRight;
         animation-duration: 2s;
         animation-timing-function: linear;
-        animation-delay: .6s;
+        animation-delay: 0.6s;
         animation-fill-mode: forwards;
       }
 

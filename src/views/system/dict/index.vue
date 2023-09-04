@@ -173,7 +173,6 @@ const selectedDictType = reactive({ typeCode: "", typeName: "" });
  * 打开字典弹窗
  */
 function openDictDialog(row: DictTypePageVO) {
-  
   dictDataDialog.visible = true;
   dictDataDialog.title = "【" + row.name + "】字典数据";
 
@@ -207,9 +206,13 @@ onMounted(() => {
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="handleQuery()">
-            <i-ep-search />搜索
+            <i-ep-search />
+            搜索
           </el-button>
-          <el-button @click="resetQuery()"><i-ep-refresh />重置</el-button>
+          <el-button @click="resetQuery()">
+            <i-ep-refresh />
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -220,14 +223,18 @@ onMounted(() => {
           v-hasPerm="['sys:dict_type:add']"
           type="success"
           @click="openDialog()"
-          ><i-ep-plus />新增</el-button
         >
+          <i-ep-plus />
+          新增
+        </el-button>
         <el-button
           type="danger"
           :disabled="ids.length === 0"
           @click="handleDelete()"
-          ><i-ep-delete />删除</el-button
         >
+          <i-ep-delete />
+          删除
+        </el-button>
       </template>
       <el-table
         v-loading="loading"
@@ -253,24 +260,30 @@ onMounted(() => {
               link
               size="small"
               @click.stop="openDictDialog(scope.row)"
-              ><i-ep-Collection />字典数据</el-button
             >
+              <i-ep-Collection />
+              字典数据
+            </el-button>
             <el-button
               v-hasPerm="['sys:dict_type:edit']"
               type="primary"
               link
               size="small"
               @click.stop="openDialog(scope.row.id)"
-              ><i-ep-edit />编辑</el-button
             >
+              <i-ep-edit />
+              编辑
+            </el-button>
             <el-button
               v-hasPerm="['sys:dict_type:delete']"
               type="primary"
               link
               size="small"
               @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />删除</el-button
             >
+              <i-ep-delete />
+              删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>

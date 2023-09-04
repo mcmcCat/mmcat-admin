@@ -33,7 +33,7 @@
       <el-dropdown trigger="click">
         <div class="avatar-container flx-center">
           <img :src="userStore.avatar + '?imageView2/1/w/40/h/40'" />
-          <i-ep-caret-bottom style="width: 0.75rem;height: 0.75rem;" />
+          <i-ep-caret-bottom style="width: 0.75rem; height: 0.75rem" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
@@ -41,16 +41,10 @@
               <!-- i18n已经全局注册了所以这里可以直接使用 $t函数 进行翻译 -->
               <el-dropdown-item>{{ $t("navbar.dashboard") }}</el-dropdown-item>
             </router-link>
-            <a
-              target="_blank"
-              href="https://github.com/mcmcCat/mmcat-admin"
-            >
+            <a target="_blank" href="https://github.com/mcmcCat/mmcat-admin">
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
-            <a
-              target="_blank"
-              href="#"
-            >
+            <a target="_blank" href="#">
               <el-dropdown-item>{{ $t("navbar.document") }}</el-dropdown-item>
             </a>
             <el-dropdown-item divided @click="logout">
@@ -99,13 +93,14 @@ function logout() {
     cancelButtonText: "取消",
     type: "warning",
   }).then(() => {
-    userStore.logout()
+    userStore
+      .logout()
       .then(() => {
         // TODO: 注销删除所有tagView
         // tagsViewStore.delAllViews();
       })
       .then(() => {
-        router.push(`/login?redirect=${route.fullPath}`);//route.fullPath是当前页面路径，方便注销后登录跳转回来
+        router.push(`/login?redirect=${route.fullPath}`); //route.fullPath是当前页面路径，方便注销后登录跳转回来
       });
   });
 }
