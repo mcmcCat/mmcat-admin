@@ -7,11 +7,17 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+    "prepare": "husky install",
     "lint:eslint": "eslint  --fix --ext .ts,.js,.vue ./src ",
     "lint:prettier": "prettier --write \"**/*.{js,cjs,ts,json,tsx,css,less,scss,vue,html,md}\"",
     "lint:stylelint": "stylelint  \"**/*.{css,scss,vue}\" --fix",
     "lint:lint-staged": "lint-staged",
-    "prepare": "husky install"
+    "commit": "git-cz"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
   },
   "lint-staged": {
     "*.{js,ts}": [
@@ -58,6 +64,8 @@
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "@typescript-eslint/parser": "^6.5.0",
     "@vitejs/plugin-vue": "^4.1.0",
+    "commitizen": "^4.3.0",
+    "cz-git": "^1.7.1",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
