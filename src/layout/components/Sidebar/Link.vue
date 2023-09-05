@@ -6,8 +6,7 @@ import { useAppStore } from "@/store/modules/app";
 const appStore = useAppStore();
 
 const sidebar = computed(() => appStore.sidebar);
-// TODO: 忽略了手机设备，后续看需不需要添加>>>>>
-// const device = computed(() => appStore.device);
+const device = computed(() => appStore.device);
 
 const props = defineProps({
   to: {
@@ -18,10 +17,9 @@ const props = defineProps({
 
 const router = useRouter(); // 获取整个路由实例
 function push() {
-  // TODO: 忽略了手机设备的情况>>>>>
-  // if (device.value === 'mobile' && sidebar.value.opened == true) {
-  //   appStore.closeSideBar(false);
-  // }
+  if (device.value === "mobile" && sidebar.value.opened == true) {
+    appStore.closeSideBar(false);
+  }
 
   // 进行路由跳转
   router.push(props.to).catch((err) => {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-// import { useTagsViewStore } from "@/store/modules/tagsView";
+import { useTagsViewStore } from "@/store/modules/tagsView";
 
-// const tagsViewStore = useTagsViewStore();
+const tagsViewStore = useTagsViewStore();
 </script>
 
 <template>
@@ -15,8 +15,8 @@
          -->
         <!-- :include="tagsViewStore.cachedViews" 将需要缓存的组件打包到一个数组中 -->
         <!-- 需要注意的是，如果我们没有指定 :include 属性，则 <keep-alive> 组件会自动缓存所有组件。 -->
-        <!-- TODO: 原本是这样<keep-alive :include="tagsViewStore.cachedViews"> -->
-        <keep-alive>
+        <!-- cachedViews告诉我们删除了对应的tag时，那么该组件的缓存销毁 -->
+        <keep-alive :include="tagsViewStore.cachedViews">
           <component :is="Component" :key="route.fullPath" />
         </keep-alive>
       </transition>

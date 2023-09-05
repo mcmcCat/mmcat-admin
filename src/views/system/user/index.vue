@@ -420,7 +420,6 @@ onMounted(() => {
             </template>
           </el-input>
 
-          <!-- TODO: 这个tree组件要研究一下 -->
           <!-- 部门树 -->
           <el-tree
             ref="deptTreeRef"

@@ -3,7 +3,7 @@ import path from "path-browserify";
 import { isExternal } from "@/utils/index";
 import AppLink from "./Link.vue";
 
-// TODO: 路由的国际化
+// 路由的国际化
 import { translateRouteTitleI18n } from "@/utils/i18n";
 
 const props = defineProps({

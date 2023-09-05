@@ -1,5 +1,12 @@
 <template>
   <div :class="classObj" class="app-wrapper">
+    <!-- 手机设备侧边栏打开遮罩层 -->
+    <div
+      v-if="classObj.mobile && classObj.openSidebar"
+      class="drawer-bg"
+      @click="handleOutsideClick"
+    ></div>
+
     <Sidebar class="sidebar-container" />
 
     <div :class="{ hasTagsView: showTagsView }" class="main-container">
@@ -48,15 +55,15 @@ const classObj = computed(() => ({
   hideSidebar: !appStore.sidebar.opened,
   openSidebar: appStore.sidebar.opened,
   withoutAnimation: appStore.sidebar.withoutAnimation,
-  // mobile: appStore.device === "mobile",
+  mobile: appStore.device === "mobile",
 }));
 
 watchEffect(() => {
   if (width.value < WIDTH) {
-    // appStore.toggleDevice("mobile");
+    appStore.toggleDevice("mobile");
     appStore.closeSideBar(true);
   } else {
-    // appStore.toggleDevice("desktop");
+    appStore.toggleDevice("desktop");
 
     if (width.value >= 1200) {
       //大屏
@@ -84,11 +91,11 @@ function handleOutsideClick() {
   width: 100%;
   height: 100%;
 
-  // TODO: 先别管 mobile
-  // &.mobile.openSidebar {
-  //   position: fixed;
-  //   top: 0;
-  // }
+  &.mobile.openSidebar {
+    position: fixed;
+    top: 0;
+  }
+
   &.openSidebar {
     position: fixed;
     top: 0;

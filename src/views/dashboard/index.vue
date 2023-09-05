@@ -50,7 +50,7 @@
     <el-row :gutter="40" style="margin-bottom: 1rem">
       <el-col :xs="24" :sm="12" :lg="6" style="margin-bottom: 1rem">
         <div class="data-box">
-          <!-- TODO: icon-box的样式 -->
+          <!-- icon-box的样式 -->
           <div class="icon-box uv">
             <svg-icon icon-name="uv" size="3em" />
           </div>

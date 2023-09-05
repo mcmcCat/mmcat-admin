@@ -220,13 +220,14 @@ onMounted(() => {
           />
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleQuery"
-            ><template #icon><i-ep-search /></template>搜索</el-button
-          >
+          <el-button type="primary" @click="handleQuery">
+            <template #icon><i-ep-search /></template>
+            搜索
+          </el-button>
           <el-button @click="resetQuery">
             <template #icon><i-ep-refresh /></template>
-            重置</el-button
-          >
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -240,8 +241,8 @@ onMounted(() => {
           @click="openDialog(0)"
         >
           <template #icon><i-ep-plus /></template>
-          新增</el-button
-        >
+          新增
+        </el-button>
       </template>
 
       <el-table
@@ -276,17 +277,18 @@ onMounted(() => {
             <el-tag
               v-if="scope.row.type === MenuTypeEnum.CATALOG"
               type="warning"
-              >目录</el-tag
             >
-            <el-tag v-if="scope.row.type === MenuTypeEnum.MENU" type="success"
-              >菜单</el-tag
-            >
-            <el-tag v-if="scope.row.type === MenuTypeEnum.BUTTON" type="danger"
-              >按钮</el-tag
-            >
-            <el-tag v-if="scope.row.type === MenuTypeEnum.EXTLINK" type="info"
-              >外链</el-tag
-            >
+              目录
+            </el-tag>
+            <el-tag v-if="scope.row.type === MenuTypeEnum.MENU" type="success">
+              菜单
+            </el-tag>
+            <el-tag v-if="scope.row.type === MenuTypeEnum.BUTTON" type="danger">
+              按钮
+            </el-tag>
+            <el-tag v-if="scope.row.type === MenuTypeEnum.EXTLINK" type="info">
+              外链
+            </el-tag>
           </template>
         </el-table-column>
 
@@ -330,7 +332,8 @@ onMounted(() => {
               size="small"
               @click.stop="openDialog(scope.row.id)"
             >
-              <i-ep-plus />新增
+              <i-ep-plus />
+              新增
             </el-button>
 
             <el-button
@@ -340,7 +343,8 @@ onMounted(() => {
               size="small"
               @click.stop="openDialog(undefined, scope.row.id)"
             >
-              <i-ep-edit />编辑
+              <i-ep-edit />
+              编辑
             </el-button>
             <el-button
               v-hasPerm="['sys:menu:delete']"
@@ -348,7 +352,8 @@ onMounted(() => {
               link
               size="small"
               @click.stop="handleDelete(scope.row.id)"
-              ><i-ep-delete />
+            >
+              <i-ep-delete />
               删除
             </el-button>
           </template>
@@ -455,7 +460,7 @@ onMounted(() => {
           label="图标"
           prop="icon"
         >
-          <!-- TODO: 图标选择器 -->
+          <!-- 图标选择器 -->
           <icon-select v-model="formData.icon" />
         </el-form-item>
 

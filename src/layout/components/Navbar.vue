@@ -12,9 +12,11 @@
 
     <!-- 右侧导航设置 -->
     <div class="flx">
-      <!-- 导航栏设置(窄屏隐藏)-->
-      <!-- TODO: <div v-if="device !== 'mobile'" class="setting-container"> -->
-      <div class="setting-container flx-align-center">
+      <!-- 右侧导航栏设置(窄屏隐藏)-->
+      <div
+        class="setting-container flx-align-center"
+        v-if="device !== 'mobile'"
+      >
         <!--全屏 -->
         <div class="setting-item" @click="toggle">
           <svg-icon
@@ -61,17 +63,17 @@
 import { storeToRefs } from "pinia";
 import { useRoute, useRouter } from "vue-router";
 import { useAppStore } from "@/store/modules/app";
-// import { useTagsViewStore } from "@/store/modules/tagsView";
+import { useTagsViewStore } from "@/store/modules/tagsView";
 import { useUserStore } from "@/store/modules/user";
 
 const appStore = useAppStore();
-// const tagsViewStore = useTagsViewStore();
+const tagsViewStore = useTagsViewStore();
 const userStore = useUserStore();
 
 const route = useRoute();
 const router = useRouter();
 
-// const { device } = storeToRefs(appStore); // 设备类型：desktop-宽屏设备 || mobile-窄屏设备
+const { device } = storeToRefs(appStore); // 设备类型：desktop-宽屏设备 || mobile-窄屏设备
 
 /**
  * 左侧菜单栏显示/隐藏
@@ -96,8 +98,8 @@ function logout() {
     userStore
       .logout()
       .then(() => {
-        // TODO: 注销删除所有tagView
-        // tagsViewStore.delAllViews();
+        // 注销删除所有tagView
+        tagsViewStore.delAllViews();
       })
       .then(() => {
         router.push(`/login?redirect=${route.fullPath}`); //route.fullPath是当前页面路径，方便注销后登录跳转回来

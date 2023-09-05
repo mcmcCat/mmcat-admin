@@ -32,7 +32,7 @@ export const hasPerm: Directive = {
 };
 
 /**
- * TODO: 实际上项目中没用使用该指令，根据业务需求来使用>>>>
+ * 实际上项目中没用使用该指令，根据业务需求来使用>>>>
  * 角色权限
  */
 export const hasRole: Directive = {

@@ -9,7 +9,7 @@ import en from "element-plus/es/locale/lang/en";
 // setup
 export const useAppStore = defineStore("app", () => {
   // state
-  // const device = useStorage("device", "desktop");
+  const device = useStorage("device", "desktop");
   const elSize = useStorage<any>("elSize", defaultSettings.elSize);
   const language = useStorage("language", defaultSettings.language);
 
@@ -54,9 +54,9 @@ export const useAppStore = defineStore("app", () => {
     sidebarStatus.value = "opened";
   }
 
-  // function toggleDevice(val: string) {
-  //   device.value = val;
-  // }
+  function toggleDevice(val: string) {
+    device.value = val;
+  }
 
   function changeSize(val: string) {
     elSize.value = val;
@@ -71,12 +71,12 @@ export const useAppStore = defineStore("app", () => {
   }
 
   return {
-    // device,
+    device,
     sidebar,
     language,
     locale,
     elSize,
-    // toggleDevice,
+    toggleDevice,
     changeSize,
     changeLanguage,
     toggleSidebar,
