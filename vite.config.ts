@@ -43,7 +43,7 @@ export default ({ mode }: any) => {
             algorithm: "gzip", // 压缩算法，默认为'gzip'
             ext: ".gz", // 压缩文件扩展名，默认为'.gz'
             threshold: 10240, // 文件大小超过threshold时才会进行压缩，默认为10KB (10240 bytes)
-            deleteOriginFile: true, // 是否删除原始文件，默认为false
+            deleteOriginFile: false, // 是否删除原始文件，默认为false
             verbose: true, // 是否在控制台显示压缩信息，默认为true
           }),
         ],
