@@ -138,7 +138,11 @@ function handleDelete(deptId?: number) {
   const deptIds = [deptId || ids.value].join(",");
 
   if (!deptIds) {
-    ElMessage.warning("请勾选删除项");
+    // ElMessage.warning("请勾选删除项");
+    ElMessage({
+      type: "warning",
+      message: "请勾选删除项",
+    });
     return;
   }
 
@@ -206,7 +210,10 @@ onMounted(() => {
             <i-ep-search />
             搜索
           </el-button>
-          <el-button @click="resetQuery"> <i-ep-refresh />重置 </el-button>
+          <el-button @click="resetQuery">
+            <i-ep-refresh />
+            重置
+          </el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -218,15 +225,17 @@ onMounted(() => {
           type="success"
           @click="openDialog(0, undefined)"
         >
-          <i-ep-plus />新增
+          <i-ep-plus />
+          新增
         </el-button>
         <el-button
           v-hasPerm="['sys:dept:delete']"
           type="danger"
-          :disabled="ids.length === 0"
           @click="handleDelete()"
         >
-          <i-ep-delete />删除
+          <!-- :disabled="ids.length === 0" -->
+          <i-ep-delete />
+          删除
         </el-button>
       </template>
 
@@ -257,7 +266,9 @@ onMounted(() => {
               link
               size="small"
               @click.stop="openDialog(scope.row.id, undefined)"
-              ><i-ep-plus />新增
+            >
+              <i-ep-plus />
+              新增
             </el-button>
             <el-button
               v-hasPerm="['sys:dept:edit']"
@@ -265,7 +276,9 @@ onMounted(() => {
               link
               size="small"
               @click.stop="openDialog(scope.row.parentId, scope.row.id)"
-              ><i-ep-edit />编辑
+            >
+              <i-ep-edit />
+              编辑
             </el-button>
             <el-button
               v-hasPerm="['sys:dept:delete']"
@@ -274,7 +287,8 @@ onMounted(() => {
               size="small"
               @click.stop="handleDelete(scope.row.id)"
             >
-              <i-ep-delete />删除
+              <i-ep-delete />
+              删除
             </el-button>
           </template>
         </el-table-column>
@@ -324,8 +338,8 @@ onMounted(() => {
 
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="handleSubmit"> 确 定 </el-button>
-          <el-button @click="closeDialog"> 取 消 </el-button>
+          <el-button type="primary" @click="handleSubmit">确 定</el-button>
+          <el-button @click="closeDialog">取 消</el-button>
         </div>
       </template>
     </el-dialog>

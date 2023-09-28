@@ -7,6 +7,8 @@ import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
+import { visualizer } from "rollup-plugin-visualizer";
+import viteCompression from "vite-plugin-compression";
 
 const pathSrc = path.resolve(__dirname, "src");
 
@@ -14,6 +16,39 @@ const pathSrc = path.resolve(__dirname, "src");
 export default ({ mode }: any) => {
   const env = loadEnv(mode, process.cwd()); // 获取当前环境的环境变量，process.cwd()当前工作的绝对路径
   return defineConfig({
+    build: {
+      target: "es2020",
+      minify: "terser", // Vite 2.6.x 以上需要配置 minify: "terser", terserOptions 才能生效
+      terserOptions: {
+        compress: {
+          // 生产环境时移除console
+          drop_console: true,
+          drop_debugger: true,
+        },
+      },
+      // rollup 配置
+      rollupOptions: {
+        output: {
+          chunkFileNames: "js/[name]-[hash].js", // 产生的 chunk 自定义命名
+          entryFileNames: "js/[name]-[hash].js", // 指定 chunks 的入口文件匹配模式
+          assetFileNames: "[ext]/[name]-[hash].[ext]", // 自定义构建结果中的静态资源名称，资源文件像 字体，图片等
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              return "vendor";
+            }
+          },
+        },
+        plugins: [
+          viteCompression({
+            algorithm: "gzip", // 压缩算法，默认为'gzip'
+            ext: ".gz", // 压缩文件扩展名，默认为'.gz'
+            threshold: 10240, // 文件大小超过threshold时才会进行压缩，默认为10KB (10240 bytes)
+            deleteOriginFile: true, // 是否删除原始文件，默认为false
+            verbose: true, // 是否在控制台显示压缩信息，默认为true
+          }),
+        ],
+      },
+    },
     // 配置路径别名
     resolve: {
       alias: [
@@ -50,6 +85,7 @@ export default ({ mode }: any) => {
     },
     plugins: [
       vue(),
+      visualizer(),
       AutoImport({
         // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
         // 自动导入 VueUse 相关函数，如 useDark() ,useToggle()
@@ -92,7 +128,7 @@ export default ({ mode }: any) => {
         symbolId: "icon-[dir]-[name]",
       }),
     ],
-    // 优化依赖项（即第三方库）的加载和打包
+    // 优化依赖项（即第三方库）的加载和打包,使它们在预构建阶段单独处理并缓存，从而加快 开发时的启动速度
     optimizeDeps: {
       // 用于指定需要优化的依赖包的名称或路径
       include: [
