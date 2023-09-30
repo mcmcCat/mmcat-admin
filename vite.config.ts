@@ -56,6 +56,11 @@ export default ({ mode }: any) => {
           find: "@",
           replacement: pathSrc,
         },
+        // [Vue Warning] ：vue-i18n官方建议您在配置打包工具时，将特性标志全局变量明确地替换为布尔字面量，以便在最终的打包文件中获得正确的树摇（tree-shaking）效果。
+        {
+          find: "vue-i18n",
+          replacement: "vue-i18n/dist/vue-i18n.cjs.js",
+        },
       ],
     },
     css: {

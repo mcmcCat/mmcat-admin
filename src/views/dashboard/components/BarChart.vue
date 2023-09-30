@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import * as echarts from "echarts/core";
 // 引入柱状图图表，图表后缀都为 Chart
-import { BarChart } from "echarts/charts";
+import { BarChart, LineChart } from "echarts/charts";
 // 引入提示框，标题，直角坐标系，数据集，内置数据转换器组件，组件后缀都为 Component
 import {
   TitleComponent,
@@ -25,6 +25,7 @@ import {
   GridComponent,
   DatasetComponent,
   TransformComponent,
+  LegendComponent,
 } from "echarts/components";
 // 标签自动布局、全局过渡动画等特性
 import { LabelLayout, UniversalTransition } from "echarts/features";
@@ -34,11 +35,13 @@ import { CanvasRenderer } from "echarts/renderers";
 // 注册必须的组件
 echarts.use([
   BarChart,
+  LineChart,
   TitleComponent,
   TooltipComponent,
   GridComponent,
   DatasetComponent,
   TransformComponent,
+  LegendComponent,
   LabelLayout,
   UniversalTransition,
   CanvasRenderer,
